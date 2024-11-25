@@ -6,7 +6,8 @@ This project is a Flask-based application that leverages **LangChain** and **Gem
 
 ## Tech Stack
 
-Flask, LangChain, Gemini-1.5-Flash
+Frontend: React, Bootstrap
+Backend: Flask, LangChain, Gemini-1.5-Flash
 
 ## Features
 

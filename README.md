@@ -1,4 +1,4 @@
-# YouTube Title Assistant
+# YouTube Title Assistant (In Dev.)
 
 ## Description
 

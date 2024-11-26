@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { getTitleSuggestions } from "./lib";
+
+interface FormData {
+  videoLink: string;
+}
 
 function App() {
-  const temp = () => {
-    console.log("Print");
+  const { register, handleSubmit } = useForm<FormData>();
+  const [suggestedTitles, setSuggestedTitles] = useState("");
+
+  const submitForm: SubmitHandler<FormData> = async (data: FormData) => {
+    // Make sure it is a youtube link.
+    const youtubeRegex =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?[a-zA-Z0-9_-]{11}/;
+
+    if (!data?.videoLink || !youtubeRegex.test(data.videoLink)) return;
+
+    // Call the API to get the title suggestions.
+    let titleSuggestions: string = await getTitleSuggestions(data.videoLink);
+
+    titleSuggestions = titleSuggestions.replace(/\n/g, "<br>");
+
+    // Set the title suggestions.
+    setSuggestedTitles(titleSuggestions);
   };
 
   return (
     <div className="App">
-      Paste YouTube Video Link
-      <input />
-      <Button onClick={temp}>Get Title Suggestions</Button>
+      <form onSubmit={handleSubmit(submitForm)}>
+        Paste YouTube Video Link
+        <input {...register("videoLink")} />
+        <Button type="submit">Get Title Suggestions</Button>
+      </form>
+
+      <div dangerouslySetInnerHTML={{ __html: suggestedTitles }} />
     </div>
   );
 }

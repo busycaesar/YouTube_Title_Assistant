@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push for localhost
+      - name: Build and push for localhost:8080
         env:
           DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/youtube-assistant-frontend
         uses: docker/build-push-action@v5
@@ -33,15 +33,5 @@ jobs:
           build-args: |
             BACKEND_URL=http://localhost:8080
           push: true
-          tags: ${{env.DOCKERHUB_REPO}}:latest
-
-      - name: Build and push for docker compose
-        env:
-          DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/youtube-assistant-frontend
-        uses: docker/build-push-action@v5
-        with:
-          context: ./Frontend
-          build-args: |
-            BACKEND_URL=http://backend:8080
-          push: true
-          tags: ${{env.DOCKERHUB_REPO}}:docker-compose
+          tags: ${{env.DOCKERHUB_REPO}}:latest,
+            ${{env.DOCKERHUB_REPO}}:localhost8080

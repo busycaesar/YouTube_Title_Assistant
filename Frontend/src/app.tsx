@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { getTitleSuggestions } from "./lib";
 
@@ -31,8 +31,14 @@ function App() {
     <div className="App">
       <form onSubmit={handleSubmit(submitForm)}>
         Paste YouTube Video Link
-        <input {...register("videoLink")} />
-        <Button type="submit">Get Title Suggestions</Button>
+        <Row>
+          <Col>
+            <input {...register("videoLink")} />
+          </Col>
+          <Col>
+            <Button type="submit">Get Title Suggestions</Button>
+          </Col>
+        </Row>
       </form>
 
       <div dangerouslySetInnerHTML={{ __html: suggestedTitles }} />

@@ -42,6 +42,6 @@ jobs:
         with:
           context: ./Frontend
           build-args: |
-            BACKEND_URL=http://backend:7000
+            BACKEND_URL=http://backend:8080
           push: true
           tags: ${{env.DOCKERHUB_REPO}}:docker-compose

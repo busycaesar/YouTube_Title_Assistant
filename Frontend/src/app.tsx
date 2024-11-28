@@ -36,7 +36,7 @@ function App() {
             <input {...register("videoLink")} />
           </Col>
           <Col>
-            <Button type="submit">Get Title Suggestions</Button>
+            <Button type="submit">Get Suggestions</Button>
           </Col>
         </Row>
       </form>

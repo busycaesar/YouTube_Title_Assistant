@@ -17,5 +17,5 @@ def generate_response(prompt_template, input_variables, gemini_api_keys_by_api_c
     # Invoke the chain by passing the input variables for the prompt template
     response = chain.invoke(input_variables)
 
-    # Return the response
+    # Return the generated response
     return response.content

@@ -31,7 +31,7 @@ jobs:
         with:
           context: ./Frontend
           build-args: |
-            BACKEND_URL=http://localhost:7000
+            BACKEND_URL=http://localhost:8080
           push: true
           tags: ${{env.DOCKERHUB_REPO}}:latest
 

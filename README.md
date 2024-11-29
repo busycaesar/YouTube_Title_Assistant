@@ -13,6 +13,12 @@ This is an application that leverages **Gemini-1.5-Flash** to generate catchy, S
 
 - Suggests SEO-friendly and catchy titles, keywords and description
 
+## How it looks?
+
+<img src="https://github.com/user-attachments/assets/138545ac-672c-4007-908d-75bab083da8c" width="525" height="750" />
+
+The user can add the Youtube video's link in the input and click the button to get the suggestions
+
 ## Author
 
 [Dev Shah](https://github.com/busycaesar)

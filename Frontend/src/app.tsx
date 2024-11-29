@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Button, Row, Col } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { getTitleSuggestions } from "./lib";
-
-interface FormData {
-  videoLink: string;
-}
+import { FormData, Suggestions } from "./interface";
+import { FaRegCopy } from "react-icons/fa";
 
 function App() {
   const { register, handleSubmit } = useForm<FormData>();
   const [suggestedTitles, setSuggestedTitles] = useState("");
+  const [suggestedKeywords, setSuggestedKeywords] = useState("");
+  const [suggestedDescription, setSuggestedDescription] = useState("");
 
   const submitForm: SubmitHandler<FormData> = async (data: FormData) => {
     // Make sure it is a youtube link.
@@ -19,29 +19,60 @@ function App() {
     if (!data?.videoLink || !youtubeRegex.test(data.videoLink)) return;
 
     // Call the API to get the title suggestions.
-    let titleSuggestions: string = await getTitleSuggestions(data.videoLink);
+    const suggestions: Suggestions = await getTitleSuggestions(data.videoLink);
 
-    titleSuggestions = titleSuggestions.replace(/\n/g, "<br>");
+    const title = suggestions.title.replace(/\n/g, "<br>");
+
+    const keywords = suggestions.keywords.replace(/\n/g, "<br>");
+
+    const description = suggestions.description.replace(/\n/g, "<br>");
 
     // Set the title suggestions.
-    setSuggestedTitles(titleSuggestions);
+    setSuggestedTitles(title);
+    setSuggestedKeywords(keywords);
+    setSuggestedDescription(description);
   };
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit(submitForm)}>
-        Paste YouTube Video Link
-        <Row>
-          <Col>
-            <input {...register("videoLink")} />
-          </Col>
-          <Col>
-            <Button type="submit">Get Suggestions</Button>
-          </Col>
-        </Row>
+      <h1 className="text-center">Paste YouTube Video Link</h1>
+      <form className="my-3 text-center" onSubmit={handleSubmit(submitForm)}>
+        <input className="mx-2" {...register("videoLink")} />
+
+        <Button className="mx-2" type="submit">
+          Get Suggestions
+        </Button>
       </form>
 
-      <div dangerouslySetInnerHTML={{ __html: suggestedTitles }} />
+      {suggestedDescription && (
+        <>
+          <h2>Suggested Description</h2>
+          <div
+            className="text-start my-4 text-3xl"
+            dangerouslySetInnerHTML={{ __html: suggestedDescription }}
+          />
+        </>
+      )}
+
+      {suggestedTitles && (
+        <>
+          <h2>Suggested Titles</h2>
+          <div
+            className="text-start my-4 text-3xl"
+            dangerouslySetInnerHTML={{ __html: suggestedTitles }}
+          />
+        </>
+      )}
+
+      {suggestedKeywords && (
+        <>
+          <h2>Suggested Keywords</h2>
+          <div
+            className="text-start my-4 text-3xl"
+            dangerouslySetInnerHTML={{ __html: suggestedKeywords }}
+          />
+        </>
+      )}
     </div>
   );
 }

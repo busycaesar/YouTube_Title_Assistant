@@ -1,6 +1,8 @@
+import { Suggestions } from "../interface";
+
 export const getTitleSuggestions = async (
   videoLink: string
-): Promise<string> => {
+): Promise<Suggestions> => {
   try {
     const response = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/api/title/`,
@@ -22,6 +24,6 @@ export const getTitleSuggestions = async (
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) console.log(error.message);
-    return "";
+    return { title: "", keywords: "", description: "" };
   }
 };

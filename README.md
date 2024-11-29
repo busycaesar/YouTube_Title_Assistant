@@ -6,7 +6,7 @@ This is an application that leverages **Gemini-1.5-Flash** to generate catchy, S
 
 ## Tech Stack
 
-- Frontend: React, Bootstrap
+- Frontend: React, Bootstrap, Tailwindcss
 - Backend: Flask, LangChain, Gemini-1.5-Flash
 
 ## Features

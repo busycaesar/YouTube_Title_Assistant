@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from .response import response
-from llm import get_title_suggestions
+from llm import get_title_suggestions, get_keywords_suggestions, get_description
 
 title_api = Blueprint("title_api", __name__)
 
@@ -21,7 +21,14 @@ def api_post_title():
     try:
         title_suggestions = get_title_suggestions(video_link, gemini_api_keys)
 
-        return jsonify(response(True, "Sent suggestions for title", title_suggestions)), 200
+        keywords_suggestions = get_keywords_suggestions(video_link, gemini_api_keys)
+
+        description_suggestion = get_description(video_link, gemini_api_keys)
+
+        return jsonify(response(True, "Sent suggestions for title", 
+                                {"title": title_suggestions, 
+                                 "keywords": keywords_suggestions, 
+                                 "description": description_suggestion })), 200
     
     except Exception as e:
         return jsonify(response(False, f"Error: {str(e)}")), 500

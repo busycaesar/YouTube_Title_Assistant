@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="text-center">Paste YouTube Video Link</h1>
+      <h1 className="text-center">Paste YouTube Video's Link</h1>
       <form className="my-3 text-center" onSubmit={handleSubmit(submitForm)}>
         <input className="mx-2" {...register("videoLink")} />
 

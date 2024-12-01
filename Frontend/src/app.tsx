@@ -73,6 +73,24 @@ function App() {
           />
         </>
       )}
+
+      <p className="flex items-center">
+        &copy; Developed with 🖤 by Dev!
+        <span className="mx-3">
+          <a
+            href="https://www.buymeacoffee.com/busycaesar7"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="https://cdn.buymeacoffee.com/buttons/default-black.png"
+              alt="Buy Me A Coffee"
+              height={41}
+              width={174}
+            />
+          </a>
+        </span>
+      </p>
     </div>
   );
 }

@@ -37,3 +37,14 @@ jobs:
           push: true
           tags: ${{env.DOCKERHUB_REPO}}:latest,
             ${{env.DOCKERHUB_REPO}}:localhost8080
+
+      - name: Build and push for deployment
+        env:
+          DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/youtube-assistant-frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./Frontend
+          build-args: |
+            BACKEND_URL=http://${{ secrets.SERVER_IP }}:8080
+          push: true
+          tags: ${{env.DOCKERHUB_REPO}}:deployment

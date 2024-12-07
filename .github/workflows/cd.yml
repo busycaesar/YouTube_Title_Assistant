@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     name: Update deployed images
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: SSH into remote server and run script
